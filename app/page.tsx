@@ -50,6 +50,7 @@ export default function Home() {
                 },
                 body: JSON.stringify({
                     pergunta: perguntaAtual,
+                    historico: mensagens,
                 }),
             });
 
@@ -197,6 +198,8 @@ export default function Home() {
             return;
         }
 
+        const historicoAnterior = mensagens.slice(0, indice);
+
         setCarregando(true);
 
         setMensagens((anteriores) =>
@@ -226,6 +229,7 @@ export default function Home() {
                 },
                 body: JSON.stringify({
                     pergunta: mensagem.pergunta,
+                    historico: historicoAnterior,
                 }),
             });
 
@@ -588,6 +592,8 @@ export default function Home() {
                             <div className="flex items-center gap-3 rounded-2xl border border-slate-800 bg-slate-900 p-2">
                                 <textarea
                                     ref={campoPerguntaRef}
+                                    id="pergunta"
+                                    name="pergunta"
                                     value={pergunta}
                                     onChange={(evento) =>
                                         setPergunta(evento.target.value)
